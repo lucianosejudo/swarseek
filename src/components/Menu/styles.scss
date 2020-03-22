@@ -1,0 +1,10 @@
+@import 'assets/styles/_colors';
+
+.menu {
+  background-color: red;
+  height: 100px;
+  &__item {
+    text-transform: uppercase;
+    letter-spacing: 5px !important;
+  }
+}
