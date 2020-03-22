@@ -4,7 +4,7 @@ const SearchSlice = createSlice({
   name: 'search',
   initialState: {
     loading: false,
-    data: [],
+    data: {},
   },
   reducers: {
     fetchData(state, action) {
@@ -15,7 +15,7 @@ const SearchSlice = createSlice({
       state.error = action.payload.error
     },
     fetchDataSuccess(state, action) {
-      state.townsData = action.payload
+      state.data = action.payload
       state.loading = false
     },
     selectUser(state, action) {

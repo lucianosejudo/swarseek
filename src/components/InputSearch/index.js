@@ -28,15 +28,16 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function CustomizedInputBase() {
+export default function InputSearch({ onChange }) {
   const classes = useStyles();
 
   return (
     <Paper component="form" className={classes.root}>
       <InputBase
         className={classes.input}
-        placeholder="Search"
         inputProps={{ 'aria-label': 'search' }}
+        onChange={e => onChange(e.target.value)}
+        placeholder="Search"
       />
       <IconButton type="submit" className={classes.iconButton} aria-label="search">
         <SearchIcon />

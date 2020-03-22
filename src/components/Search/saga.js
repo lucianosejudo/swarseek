@@ -1,9 +1,11 @@
 import { call, put, takeLatest } from 'redux-saga/effects'
 import { fetchData, fetchDataError, fetchDataSuccess } from './slice'
+import { fetchPeopleData } from './api'
 
-function* fetchUser(action) {
+function* fetchUser({ payload }) {
    try {
-      yield put(fetchDataSuccess());
+      const { data } = yield call(fetchPeopleData, payload)
+      yield put(fetchDataSuccess(data));
    } catch (e) {
       yield put(fetchDataError({ error: e.message }));
    }
