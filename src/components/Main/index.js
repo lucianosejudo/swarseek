@@ -7,14 +7,13 @@ import './styles.scss';
 function Main() {
   return (
     <div className="main">
-      <SpaceBackground />
       <Grid container spacing={5}>
-        <Grid item xs={12} sm={2}>
+        <Grid item xs={12} sm={4}>
           <Menu />
         </Grid>
         <Grid item xs={12} sm={4}>
         </Grid>
-        <Grid item xs={12} sm={6}>
+        <Grid item xs={12} sm={4}>
         </Grid>
       </Grid>
     </div>
