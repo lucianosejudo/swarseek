@@ -1,0 +1,15 @@
+@import 'assets/styles/_colors';
+
+.item-list {
+  list-style: none;
+
+  & li {
+    padding: 10px;
+    border: 1px solid $grey;
+
+    &:hover {
+      cursor: pointer;
+      background-color: $grey;
+    }
+  }
+}

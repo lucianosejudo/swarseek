@@ -3,6 +3,8 @@
 .menu {
   list-style: none;
   width: 300px;
+  margin: 0;
+
   &__item {
     border: 1px solid $grey;
     letter-spacing: 5px;
