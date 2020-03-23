@@ -5,17 +5,17 @@ const SearchSlice = createSlice({
   initialState: {
     loading: false,
     data: {},
-    category: 'personajes'
+    category: 'people'
   },
   reducers: {
-    fetchUsers(state, action) {
+    fetchData(state, action) {
       state.loading = true
     },
-    fetchUsersError(state, action) {
+    fetchDataError(state, action) {
       state.loading = false
       state.error = action.payload.error
     },
-    fetchUsersSuccess(state, action) {
+    fetchDataSuccess(state, action) {
       state.data = action.payload
       state.loading = false
     },
@@ -40,9 +40,9 @@ const SearchSlice = createSlice({
 })
 
 export const {
-  fetchUsers,
-  fetchUsersError,
-  fetchUsersSuccess,
+  fetchData,
+  fetchDataError,
+  fetchDataSuccess,
   fetchMovies,
   fetchMoviesError,
   fetchMoviesSuccess,

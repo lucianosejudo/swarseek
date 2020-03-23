@@ -8,10 +8,10 @@ import './styles.scss'
 
 const menuItems = [{
   label: 'Personajes',
-  category: 'personajes',
+  category: 'people',
 }, {
   label: 'Peliculas',
-  category: 'peliculas'
+  category: 'films'
 }];
 
 function Menu({ category, changeCategory }) {

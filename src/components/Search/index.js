@@ -4,13 +4,18 @@ import { connect } from 'react-redux'
 import { debounce } from 'lodash'
 import InputSearch from 'components/InputSearch'
 import ItemList from 'components/ItemList'
-import { selectSearchLoading, selectSearchResults } from './selectors'
-import { fetchUsers, selectItem } from './slice'
+import { selectSearchLoading, selectSearchResults, selectCategory } from './selectors'
+import { fetchData, selectItem } from './slice'
 
-function Search({ fetchUsers, results, selectItem }) {
+function Search({
+    category,
+    fetchData,
+    results,
+    selectItem,
+  }) {
 
   function onChange(search) {
-    fetchUsers(search)
+    fetchData({ category, search })
   }
 
   function onItemClick(item) {
@@ -28,18 +33,19 @@ function Search({ fetchUsers, results, selectItem }) {
 }
 
 Search.propTypes = {
-  fetchUsers: PropTypes.func.isRequired,
+  fetchData: PropTypes.func.isRequired,
   loading: PropTypes.bool,
 }
 
 const mapStateToProps = state => ({
+  category: selectCategory(state),
   loading: selectSearchLoading(state),
   results: selectSearchResults(state)
 })
 
 const actions = {
   selectItem,
-  fetchUsers
+  fetchData
 }
 
 export default connect(mapStateToProps, actions)(Search);
