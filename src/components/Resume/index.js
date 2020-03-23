@@ -2,11 +2,16 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { selectSelectedItem } from 'components/Search/selectors'
+import { selectItem } from 'components/Search/slice'
 
-function Resume({ selectedItem }) {
+function Resume({ item }) {
   return (
     <div className="resume">
-      {selectedItem && selectedItem.name}
+      {item && (
+        <>
+          {Object.keys(item).map(key => <div>{`${key}: ${item[key]}`}</div>)}
+        </>
+      )}
     </div>
   )
 }
@@ -16,7 +21,7 @@ Resume.propTypes = {
 }
 
 const mapStateToProps = state => ({
-  selectedItem: selectSelectedItem(state),
+  item: selectSelectedItem(state),
 })
 
 const actions = {
