@@ -5,19 +5,23 @@ import { debounce } from 'lodash'
 import InputSearch from 'components/InputSearch'
 import ItemList from 'components/ItemList'
 import { selectSearchLoading, selectSearchResults } from './selectors'
-import { fetchData } from './slice'
+import { fetchData, selectItem } from './slice'
 
-function Search({ fetchData, results }) {
+function Search({ fetchData, results, selectItem }) {
 
-  function onChange(e) {
-    fetchData(e)
+  function onChange(search) {
+    fetchData(search)
+  }
+
+  function onItemClick(item) {
+    selectItem(item)
   }
 
   return (
     <div className="search">
       <InputSearch onChange={debounce(onChange, 300)}/>
       <div className="search__results">
-        {results && <ItemList items={results} />}
+        {results && <ItemList items={results} onItemClick={onItemClick} />}
       </div>
     </div>
   )
@@ -33,4 +37,9 @@ const mapStateToProps = state => ({
   results: selectSearchResults(state)
 })
 
-export default connect(mapStateToProps, { fetchData })(Search);
+const actions = {
+  selectItem,
+  fetchData
+}
+
+export default connect(mapStateToProps, actions)(Search);

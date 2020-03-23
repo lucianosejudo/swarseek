@@ -18,12 +18,12 @@ const SearchSlice = createSlice({
       state.data = action.payload
       state.loading = false
     },
-    selectUser(state, action) {
-      state.selectedUser = action.payload
+    selectItem(state, action) {
+      state.selectedItem = action.payload
     }
   }
 })
 
-export const { fetchData, fetchDataError, fetchDataSuccess, selectUser } = SearchSlice.actions
+export const { fetchData, fetchDataError, fetchDataSuccess, selectItem } = SearchSlice.actions
 
 export default SearchSlice.reducer

@@ -2,11 +2,11 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import './styles.scss'
 
-function ItemList({ items }) {
+function ItemList({ items, onItemClick }) {
   return (
     <ul className="item-list">
       {items.map(item =>
-        <li>{item.name}</li>  
+        <li onClick={() => onItemClick(item)}>{item.name}</li>  
       )}
     </ul>
   )
@@ -14,6 +14,7 @@ function ItemList({ items }) {
 
 ItemList.propTypes = {
   items: PropTypes.array,
+  onItemClick: PropTypes.func,
 }
 
 export default ItemList
