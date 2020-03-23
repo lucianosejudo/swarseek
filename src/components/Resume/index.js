@@ -2,14 +2,16 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { selectSelectedItem } from 'components/Search/selectors'
-import { selectItem } from 'components/Search/slice'
 
 function Resume({ item }) {
   return (
     <div className="resume">
       {item && (
         <>
-          {Object.keys(item).map(key => <div>{`${key}: ${item[key]}`}</div>)}
+          <div className="resume__name">Nombre: {item.name}</div>
+          <div className="resume__eyes">Color de ojos: {item.eye_color}</div>
+          <div className="resume__height">Altura: {item.height}cm</div>
+          <div className="resume__mass">Peso: {item.mass}kg</div>
         </>
       )}
     </div>

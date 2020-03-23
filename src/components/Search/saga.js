@@ -1,18 +1,39 @@
 import { call, put, takeLatest } from 'redux-saga/effects'
-import { fetchData, fetchDataError, fetchDataSuccess } from './slice'
+import { 
+fetchUsers,
+  fetchUsersError,
+  fetchUsersSuccess,
+  fetchMovies,
+  fetchMoviesError,
+  fetchMoviesSuccess,
+} from './slice'
 import { fetchPeopleData } from './api'
 
-function* fetchUser({ payload }) {
+function* fetchUserWorker({ payload }) {
    try {
       const { data } = yield call(fetchPeopleData, payload)
-      yield put(fetchDataSuccess(data));
+      yield put(fetchUsersSuccess(data));
    } catch (e) {
-      yield put(fetchDataError({ error: e.message }));
+      yield put(fetchUsersError({ error: e.message }));
    }
 }
 
 function* fetchDataWatcher() {
-  yield takeLatest(fetchData().type, fetchUser);
+  yield takeLatest(fetchUsers().type, fetchUserWorker);
 }
 
-export default fetchDataWatcher;
+function* fetchMoviesWorker({ payload }) {
+   try {
+      const { data } = yield call(fetchPeopleData, payload)
+      yield put(fetchMoviesSuccess(data));
+   } catch (e) {
+      yield put(fetchMoviesError({ error: e.message }));
+   }
+}
+
+function* fetchMoviesWatcher() {
+  yield takeLatest(fetchMovies().type, fetchMoviesWorker);
+}
+
+
+export default [fetchDataWatcher, fetchMoviesWatcher];

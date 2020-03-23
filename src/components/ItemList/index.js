@@ -5,8 +5,8 @@ import './styles.scss'
 function ItemList({ items, onItemClick }) {
   return (
     <ul className="item-list">
-      {items.map(item =>
-        <li onClick={() => onItemClick(item)}>{item.name}</li>  
+      {items.map((item, key) =>
+        <li onClick={() => onItemClick(item)} key={key}>{item.name}</li>  
       )}
     </ul>
   )

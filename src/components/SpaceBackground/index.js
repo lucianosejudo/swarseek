@@ -3,6 +3,6 @@ import './styles.scss'
 
 export default function SpaceBackground() {
   return (
-  	<div class="stars"></div>
+  	<div className="stars"></div>
   )
 }

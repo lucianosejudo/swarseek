@@ -1,16 +1,16 @@
-import React from 'react'
+  import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { debounce } from 'lodash'
 import InputSearch from 'components/InputSearch'
 import ItemList from 'components/ItemList'
 import { selectSearchLoading, selectSearchResults } from './selectors'
-import { fetchData, selectItem } from './slice'
+import { fetchUsers, selectItem } from './slice'
 
-function Search({ fetchData, results, selectItem }) {
+function Search({ fetchUsers, results, selectItem }) {
 
   function onChange(search) {
-    fetchData(search)
+    fetchUsers(search)
   }
 
   function onItemClick(item) {
@@ -28,7 +28,7 @@ function Search({ fetchData, results, selectItem }) {
 }
 
 Search.propTypes = {
-  fetchData: PropTypes.func.isRequired,
+  fetchUsers: PropTypes.func.isRequired,
   loading: PropTypes.bool,
 }
 
@@ -39,7 +39,7 @@ const mapStateToProps = state => ({
 
 const actions = {
   selectItem,
-  fetchData
+  fetchUsers
 }
 
 export default connect(mapStateToProps, actions)(Search);
