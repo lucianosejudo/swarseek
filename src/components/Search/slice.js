@@ -19,17 +19,6 @@ const SearchSlice = createSlice({
       state.data = action.payload
       state.loading = false
     },
-    fetchMovies(state, action) {
-      state.loading = true
-    },
-    fetchMoviesError(state, action) {
-      state.loading = false
-      state.error = action.payload.error
-    },
-    fetchMoviesSuccess(state, action) {
-      state.data = action.payload
-      state.loading = false
-    },
     selectItem(state, action) {
       state.selectedItem = action.payload
     },
@@ -43,9 +32,6 @@ export const {
   fetchData,
   fetchDataError,
   fetchDataSuccess,
-  fetchMovies,
-  fetchMoviesError,
-  fetchMoviesSuccess,
   selectItem,
   changeCategory
 } = SearchSlice.actions

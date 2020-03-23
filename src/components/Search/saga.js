@@ -3,9 +3,6 @@ import {
   fetchData,
   fetchDataError,
   fetchDataSuccess,
-  fetchMovies,
-  fetchMoviesError,
-  fetchMoviesSuccess,
 } from './slice'
 import { fetchDataApi } from './api'
 
@@ -22,18 +19,4 @@ function* fetchDataWatcher() {
   yield takeLatest(fetchData().type, fetchUserWorker);
 }
 
-function* fetchMoviesWorker({ payload }) {
-   try {
-		const { data } = yield call(fetchData, payload)
-		yield put(fetchMoviesSuccess(data));
-   } catch (e) {
-		yield put(fetchMoviesError({ error: e.message }));
-   }
-}
-
-function* fetchMoviesWatcher() {
-  yield takeLatest(fetchMovies().type, fetchMoviesWorker);
-}
-
-
-export default [fetchDataWatcher, fetchMoviesWatcher];
+export default [fetchDataWatcher];
