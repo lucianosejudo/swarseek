@@ -10,10 +10,11 @@ const useStyles = makeStyles(theme => ({
     '& > *': {
       margin: theme.spacing(1),
     },
+    position: 'absolute',
+    bottom: '30px'
   },
   text: {
     color: '#fafafa',
-    background: '#181818'
   }
 }));
 
