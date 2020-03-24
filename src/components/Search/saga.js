@@ -1,10 +1,11 @@
-import { call, put, takeLatest } from 'redux-saga/effects'
+import { call, put, takeLatest , all } from 'redux-saga/effects'
 import { 
   fetchData,
   fetchDataError,
   fetchDataSuccess,
+  selectItem,
 } from './slice'
-import { fetchDataApi } from './api'
+import { fetchDataApi, fetchImage } from './api'
 
 function* fetchUserWorker({ payload }) {
    try {
@@ -19,4 +20,24 @@ function* fetchDataWatcher() {
   yield takeLatest(fetchData().type, fetchUserWorker);
 }
 
-export default [fetchDataWatcher];
+function* fetchImageWorker({ payload }) {
+  try {
+    const data = yield call(fetchImage, payload.name)
+    console.log(data)
+  } catch (e) {
+   yield put(fetchDataError({ error: e.message }));
+  }
+}
+
+function* fetchImageWatcher() {
+ yield takeLatest(selectItem().type, fetchImageWorker);
+}
+
+function * rootSaga() {
+  yield all([
+    fetchImageWatcher(),
+    fetchDataWatcher(),
+  ])
+}
+
+export default rootSaga;

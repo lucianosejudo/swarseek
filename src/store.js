@@ -10,7 +10,7 @@ export default function configureAppStore() {
 		reducer: rootReducer,
 		middleware: [sagaMiddleware],
 	})
-	sagaMiddleware.run(...searchSaga)
+	sagaMiddleware.run(searchSaga)
 
 	return store
 }
