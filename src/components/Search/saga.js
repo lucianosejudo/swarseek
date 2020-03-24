@@ -5,6 +5,7 @@ import {
   fetchDataSuccess,
   selectItem,
   fetchExtraDataSuccess,
+  fetchExtraDataFail,
 } from './slice'
 import { fetchDataApi, fetchImage, fetchFromApi } from './api'
 import { EXTRA_DATA } from './utils'
@@ -40,13 +41,14 @@ function* fetchExtraDataWorker({ payload }) {
     const keys = Object.keys(payload)
     const extraData = keys.filter(key => EXTRA_DATA.includes(key))
 
-    for (let index = 0; index < extraData.length; index++) {
-      const calls = payload[extraData[index]].map(api => call(fetchFromApi, api))
-      const result = yield all([...calls])
-      yield put(fetchExtraDataSuccess({ field: extraData[index], data: result  }))
+    for (const field of extraData) {
+      const calls = payload[field].map(api => call(fetchFromApi, api))
+      const results = yield all(calls)
+      const data = results.map(res => res.data)
+      yield put(fetchExtraDataSuccess({ field, data }))
     }
   } catch (e) {
-   yield put(fetchDataError({ error: e.message }));
+   yield put(fetchExtraDataFail({ error: e.message }));
   }
 }
 
