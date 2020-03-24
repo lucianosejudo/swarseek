@@ -19,6 +19,9 @@ const SearchSlice = createSlice({
       state.data = action.payload
       state.loading = false
     },
+    fetchExtraDataSuccess(state, action) {
+      state.selectedItem[action.payload.field] = action.payload.data
+    },
     selectItem(state, action) {
       state.selectedItem = action.payload
     },
@@ -33,7 +36,8 @@ export const {
   fetchDataError,
   fetchDataSuccess,
   selectItem,
-  changeCategory
+  changeCategory,
+  fetchExtraDataSuccess,
 } = SearchSlice.actions
 
 export default SearchSlice.reducer
