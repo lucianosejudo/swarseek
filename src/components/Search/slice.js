@@ -31,6 +31,7 @@ const SearchSlice = createSlice({
     },
     changeCategory(state, action) {
       state.category = action.payload
+      state.data = {}
     }
   }
 })

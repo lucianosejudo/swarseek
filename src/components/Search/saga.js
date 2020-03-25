@@ -12,7 +12,7 @@ import { EXTRA_DATA } from './utils'
 
 function* fetchUserWorker({ payload }) {
    try {
-		const { data } = yield call(fetchDataApi, payload)
+    let { data } = yield call(fetchDataApi, payload)
 		yield put(fetchDataSuccess(data));
    } catch (e) {
     yield put(fetchDataError({ error: e.message }));
