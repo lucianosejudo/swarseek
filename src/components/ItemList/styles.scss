@@ -3,11 +3,17 @@
 .item-list {
   list-style: none;
   padding: 0;
-  width: 400px;
 
-  & li {
-    padding: 10px;
+  &__item {
+    display: flex;
+    align-items: center;
     border: 1px solid $grey;
+
+    &-label {
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-left: 5px;
+    }
 
     &:hover {
       cursor: pointer;

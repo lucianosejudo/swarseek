@@ -1,0 +1,33 @@
+@import 'assets/styles/_colors';
+
+.character-resume {
+
+  &__name {
+    font-size: 60px;
+    margin-bottom: 15px;
+  }
+
+  &__data {
+    display: flex;
+    font-size: 20px;
+    &-img {
+      margin-right: 20px;
+      img {
+        height: 40vh;
+      }
+    }
+  }
+
+
+  &__list {
+    &-item {
+      color: $link-color;
+      cursor: pointer;
+      margin-bottom: 10px;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}

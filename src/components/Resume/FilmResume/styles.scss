@@ -1,0 +1,18 @@
+@import 'assets/styles/_colors';
+
+.film-resume {
+  display: flex;
+  flex-direction: column;
+
+  &__title {
+    font-size: 40px;
+  }
+
+  &__img {
+    margin: 10px;
+    img {
+      align-self: center;
+      height: 40vh;
+    }
+  }
+}

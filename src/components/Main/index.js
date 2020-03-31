@@ -21,14 +21,14 @@ function Main() {
         <Grid item sm={12}>
           <LogoTitle />
         </Grid>
-        <Grid item xs={12} sm={4}>
+        <Grid item xs={12} sm={3}>
           <Menu />
           <TravelButton onClick={handleSetSpace} active={space} />
         </Grid>
-        <Grid item xs={12} sm={4}>
+        <Grid item xs={12} sm={3}>
           <Search />
         </Grid>
-        <Grid item xs={12} sm={4}>
+        <Grid item xs={12} sm={6}>
           <Resume />
         </Grid>
       </Grid>
