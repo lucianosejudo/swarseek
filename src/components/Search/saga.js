@@ -7,7 +7,7 @@ import {
   fetchExtraDataSuccess,
   fetchExtraDataFail,
 } from './slice'
-import { fetchDataApi, fetchImage, fetchFromApi } from './api'
+import { fetchDataApi, fetchFromApi } from './api'
 import { EXTRA_DATA } from './utils'
 
 function* fetchUserWorker({ payload }) {
@@ -21,19 +21,6 @@ function* fetchUserWorker({ payload }) {
 
 function* fetchDataWatcher() {
   yield takeLatest(fetchData().type, fetchUserWorker);
-}
-
-function* fetchImageWorker({ payload }) {
-  try {
-    const data = yield call(fetchImage, payload.name)
-    console.log(data)
-  } catch (e) {
-   yield put(fetchDataError({ error: e.message }));
-  }
-}
-
-function* fetchImageWatcher() {
- yield takeLatest(selectItem().type, fetchImageWorker);
 }
 
 function* fetchExtraDataWorker({ payload }) {
@@ -58,7 +45,6 @@ function* fetchExtraDataWatcher() {
 
 function * rootSaga() {
   yield all([
-    fetchImageWatcher(),
     fetchDataWatcher(),
     fetchExtraDataWatcher(),
   ])
