@@ -2,7 +2,7 @@
 
 .welcome {
   &__title {
-    font-size: 40px;
+    font-size: 50px;
   }
 
   &__label {
@@ -10,9 +10,18 @@
   }
 
   &__msg {
-    font-size: 45px;
+    font-size: 35px;
     font-weight: 600;
     font-family: 'Oswald', sans-serif;
     color: $yellow;
+  }
+
+  &__images {
+    display: flex;
+    justify-content: center;
+
+    img {
+      height: 20vh;
+    }
   }
 }
