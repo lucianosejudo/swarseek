@@ -1,5 +1,9 @@
 import React, { useState }from 'react'
+import { connect } from 'react-redux'
+import { selectSelectedItem } from 'components/Search/selectors'
+import { selectItem } from 'components/Search/slice'
 import Grid from '@material-ui/core/Grid'
+import Welcome from 'components/Welcome'
 import Search from 'components/Search'
 import Resume from 'components/Resume'
 import LogoTitle from 'components/LogoTitle'
@@ -8,7 +12,7 @@ import Menu from 'components/Menu'
 import TravelButton from 'components/TravelButton'
 import './styles.scss'
 
-function Main() {
+function Main({ selectedItem }) {
   const [space, toggleSpace] = useState(false)
 
   function handleSetSpace() {
@@ -29,11 +33,24 @@ function Main() {
           <Search />
         </Grid>
         <Grid item xs={12} sm={6}>
-          <Resume />
+          {selectedItem
+            ? <Resume item={selectedItem} />
+            : <Welcome />
+          }
+          
         </Grid>
       </Grid>
     </div>
   );
 }
 
-export default Main;
+const mapStateToProps = state => ({
+  selectedItem: selectSelectedItem(state),
+})
+
+const actions = {
+  selectItem
+}
+
+export default connect(mapStateToProps, actions)(Main);
+
