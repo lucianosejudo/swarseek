@@ -1,0 +1,10 @@
+.search {
+  &__results {
+    position: relative;
+    min-height: 58px;
+
+    &--loading {
+      opacity: 0.5;
+    }
+  }
+}

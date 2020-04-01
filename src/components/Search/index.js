@@ -1,16 +1,20 @@
   import React from 'react'
 import PropTypes from 'prop-types'
+import cn from 'classnames'
 import { connect } from 'react-redux'
 import { debounce } from 'lodash'
+import Spinner from 'components/Spinner'
 import InputSearch from 'components/InputSearch'
 import ItemList from 'components/ItemList'
 import { selectSearchLoading, selectSearchResults, selectCategory } from './selectors'
 import { fetchData, selectItem } from './slice'
+import './styles.scss'
 
 function Search({
     category,
     fetchData,
     results,
+    loading,
     selectItem,
   }) {
 
@@ -25,8 +29,9 @@ function Search({
   return (
     <div className="search">
       <InputSearch onChange={debounce(onChange, 300)}/>
-      <div className="search__results">
+      <div className={cn('search__results', { 'search__results--loading': loading }) }>
         {results && <ItemList items={results} onItemClick={onItemClick} />}
+        {loading && <Spinner />}
       </div>
     </div>
   )
