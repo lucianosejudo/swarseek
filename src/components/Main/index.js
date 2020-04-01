@@ -3,7 +3,6 @@ import { connect } from 'react-redux'
 import { selectSelectedItem } from 'components/Search/selectors'
 import { selectItem } from 'components/Search/slice'
 import Grid from '@material-ui/core/Grid'
-import Grow from '@material-ui/core/Grow';
 import Welcome from 'components/Welcome'
 import Search from 'components/Search'
 import Resume from 'components/Resume'
@@ -34,12 +33,9 @@ function Main({ selectedItem }) {
           <Search />
         </Grid>
         <Grid item xs={12} sm={6}>
-          <Grow in={true}>
-            {selectedItem
-              ? <Resume item={selectedItem} />
-              : <Welcome />
-            }
-          </Grow>
+          {selectedItem
+          ? <Resume item={selectedItem} /> : <Welcome />
+          }
         </Grid>
       </Grid>
     </div>

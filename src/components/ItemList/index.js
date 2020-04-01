@@ -4,7 +4,10 @@ import Avatar from 'components/Avatar'
 import getImageFromUrl from 'components/utils/getImgFromUrl'
 import './styles.scss'
 
-function ItemList({ items, onItemClick }) {
+function ItemList({
+    items,
+    onItemClick,
+  }) {
   return (
     <ul className="item-list">
       {items.map((item, key) =>

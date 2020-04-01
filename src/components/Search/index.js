@@ -4,9 +4,15 @@ import cn from 'classnames'
 import { connect } from 'react-redux'
 import { debounce } from 'lodash'
 import Spinner from 'components/Spinner'
+import Pagination from 'components/Pagination'
 import InputSearch from 'components/InputSearch'
 import ItemList from 'components/ItemList'
-import { selectSearchLoading, selectSearchResults, selectCategory } from './selectors'
+import {
+  selectSearchLoading,
+  selectSearchResults,
+  selectCategory,
+  selectCount,
+} from './selectors'
 import { fetchData, selectItem } from './slice'
 import './styles.scss'
 
@@ -16,6 +22,7 @@ function Search({
     results,
     loading,
     selectItem,
+    count
   }) {
 
   function onChange(search) {
@@ -30,7 +37,13 @@ function Search({
     <div className="search">
       <InputSearch onChange={debounce(onChange, 300)}/>
       <div className={cn('search__results', { 'search__results--loading': loading }) }>
-        {results && <ItemList items={results} onItemClick={onItemClick} />}
+        {results && (
+          <>
+            <ItemList items={results} onItemClick={onItemClick} />
+            <Pagination count={count} />
+          </>
+        )}
+
         {loading && <Spinner />}
       </div>
     </div>
@@ -45,7 +58,8 @@ Search.propTypes = {
 const mapStateToProps = state => ({
   category: selectCategory(state),
   loading: selectSearchLoading(state),
-  results: selectSearchResults(state)
+  results: selectSearchResults(state),
+  count: selectCount(state)
 })
 
 const actions = {
