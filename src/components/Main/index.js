@@ -12,7 +12,7 @@ import Menu from 'components/Menu'
 import TravelButton from 'components/TravelButton'
 import './styles.scss'
 
-function Main({ selectedItem }) {
+function Main({ selectedItem, selectItem }) {
   const [space, toggleSpace] = useState(false)
 
   function handleSetSpace() {
@@ -34,7 +34,7 @@ function Main({ selectedItem }) {
         </Grid>
         <Grid item xs={12} sm={6}>
           {selectedItem
-          ? <Resume item={selectedItem} /> : <Welcome />
+          ? <Resume item={selectedItem} selectItem={selectItem} /> : <Welcome />
           }
         </Grid>
       </Grid>
@@ -50,5 +50,5 @@ const actions = {
   selectItem
 }
 
-export default connect(mapStateToProps, actions)(Main);
+export default connect(mapStateToProps, {...actions})(Main);
 
