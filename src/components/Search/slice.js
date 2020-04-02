@@ -4,6 +4,7 @@ const SearchSlice = createSlice({
   name: 'search',
   initialState: {
     loading: false,
+    loadingExtraData: false,
     data: {},
     category: 'people'
   },
@@ -19,11 +20,15 @@ const SearchSlice = createSlice({
       state.data = payload
       state.loading = false
     },
+    fetchExtraData(state) {
+      state.loadingExtraData = true
+    },
     fetchExtraDataSuccess(state, { payload }) {
       state.selectedItem[payload.field] = payload.data
+      state.loadingExtraData = false
     },
     fetchExtraDataFail(state, { payload }) {
-      state.loading = false
+      state.loadingExtraData = false
       state.error = payload.error
     },
     loadMoreData(state) {
@@ -54,6 +59,7 @@ export const {
   fetchDataSuccess,
   selectItem,
   changeCategory,
+  fetchExtraData,
   fetchExtraDataSuccess,
   fetchExtraDataFail,
   loadMoreData,

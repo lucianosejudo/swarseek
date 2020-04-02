@@ -19,6 +19,9 @@
 
 
   &__list {
+    position: relative;
+    min-height: 150px;
+
     &-item {
       color: $link-color;
       cursor: pointer;

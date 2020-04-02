@@ -1,1 +1,1 @@
-export const EXTRA_DATA = ['films', 'characters']
+export const EXTRA_DATA = ['films']

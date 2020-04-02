@@ -4,6 +4,7 @@ import {
   fetchDataError,
   fetchDataSuccess,
   selectItem,
+  fetchExtraData,
   fetchExtraDataSuccess,
   fetchExtraDataFail,
   loadMoreData,
@@ -28,6 +29,7 @@ function* fetchDataWatcher() {
 
 function* fetchExtraDataWorker({ payload }) {
   try {
+    yield put(fetchExtraData())
     const keys = Object.keys(payload)
     const extraData = keys.filter(key => EXTRA_DATA.includes(key))
 
