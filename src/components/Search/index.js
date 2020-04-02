@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import cn from 'classnames'
 import InfiniteScroll from 'react-infinite-scroller';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import { connect } from 'react-redux'
 import { debounce } from 'lodash'
 import Spinner from 'components/Spinner'
@@ -47,8 +48,8 @@ function Search({
           <InfiniteScroll
             pageStart={0}
             loadMore={() => handleLoadMore()}
-            hasMore={true || false}
-            loader={<div className="loader" key={0}>Loading ...</div>}
+            hasMore={!!nextPage}
+            loader={<div style={{ textAlign: 'center' }}><CircularProgress /></div>}
           >
             <ItemList items={results} onItemClick={onItemClick} />
           </InfiniteScroll>
