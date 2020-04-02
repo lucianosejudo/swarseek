@@ -8,29 +8,41 @@ const SearchSlice = createSlice({
     category: 'people'
   },
   reducers: {
-    fetchData(state, action) {
+    fetchData(state) {
       state.loading = true
     },
-    fetchDataError(state, action) {
+    fetchDataError(state, { payload }) {
       state.loading = false
-      state.error = action.payload.error
+      state.error = payload.error
     },
-    fetchDataSuccess(state, action) {
-      state.data = action.payload
+    fetchDataSuccess(state, { payload }) {
+      state.data = payload
       state.loading = false
     },
-    fetchExtraDataSuccess(state, action) {
-      state.selectedItem[action.payload.field] = action.payload.data
+    fetchExtraDataSuccess(state, { payload }) {
+      state.selectedItem[payload.field] = payload.data
     },
-    fetchExtraDataFail(state, action) {
+    fetchExtraDataFail(state, { payload }) {
       state.loading = false
-      state.error = action.payload.error
+      state.error = payload.error
     },
-    selectItem(state, action) {
-      state.selectedItem = action.payload
+    loadMoreData(state) {
+
     },
-    changeCategory(state, action) {
-      state.category = action.payload
+    loadMoreDataSuccess(state, { payload }) {
+      state.data = {
+        ...payload,
+        results: [...state.data.results, ...payload.results],
+      }
+    },
+    loadMoreDataFail(state, { payload }) {
+      state.error = payload
+    },
+    selectItem(state, { payload }) {
+      state.selectedItem = payload
+    },
+    changeCategory(state, { payload }) {
+      state.category = payload
       state.data = {}
     }
   }
@@ -44,6 +56,9 @@ export const {
   changeCategory,
   fetchExtraDataSuccess,
   fetchExtraDataFail,
+  loadMoreData,
+  loadMoreDataSuccess,
+  loadMoreDataFail
 } = SearchSlice.actions
 
 export default SearchSlice.reducer

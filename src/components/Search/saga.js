@@ -6,11 +6,14 @@ import {
   selectItem,
   fetchExtraDataSuccess,
   fetchExtraDataFail,
+  loadMoreData,
+  loadMoreDataSuccess,
+  loadMoreDataFail
 } from './slice'
 import { fetchDataApi, fetchFromApi } from './api'
 import { EXTRA_DATA } from './utils'
 
-function* fetchUserWorker({ payload }) {
+function* fetchDataWorker({ payload }) {
    try {
     let { data } = yield call(fetchDataApi, payload)
 		yield put(fetchDataSuccess(data));
@@ -20,7 +23,7 @@ function* fetchUserWorker({ payload }) {
 }
 
 function* fetchDataWatcher() {
-  yield takeLatest(fetchData().type, fetchUserWorker);
+  yield takeLatest(fetchData().type, fetchDataWorker);
 }
 
 function* fetchExtraDataWorker({ payload }) {
@@ -43,10 +46,25 @@ function* fetchExtraDataWatcher() {
  yield takeLatest(selectItem().type, fetchExtraDataWorker);
 }
 
+function* loadMoreDataWorker({ payload }) {
+  try {
+   let { data } = yield call(fetchFromApi, payload)
+   yield put(loadMoreDataSuccess(data));
+  } catch (e) {
+   yield put(loadMoreDataFail({ error: e.message }));
+  }
+}
+
+function* loadMoreDataWatcher() {
+ yield takeLatest(loadMoreData().type, loadMoreDataWorker);
+}
+
+
 function * rootSaga() {
   yield all([
     fetchDataWatcher(),
     fetchExtraDataWatcher(),
+    loadMoreDataWatcher()
   ])
 }
 

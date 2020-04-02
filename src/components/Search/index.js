@@ -1,10 +1,10 @@
-  import React from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import cn from 'classnames'
+import InfiniteScroll from 'react-infinite-scroller';
 import { connect } from 'react-redux'
 import { debounce } from 'lodash'
 import Spinner from 'components/Spinner'
-import Pagination from 'components/Pagination'
 import InputSearch from 'components/InputSearch'
 import ItemList from 'components/ItemList'
 import {
@@ -12,8 +12,9 @@ import {
   selectSearchResults,
   selectCategory,
   selectCount,
+  selectSearchNextPage,
 } from './selectors'
-import { fetchData, selectItem } from './slice'
+import { fetchData, selectItem, loadMoreData } from './slice'
 import './styles.scss'
 
 function Search({
@@ -22,7 +23,8 @@ function Search({
     results,
     loading,
     selectItem,
-    count
+    nextPage,
+    loadMoreData
   }) {
 
   function onChange(search) {
@@ -33,15 +35,23 @@ function Search({
     selectItem(item)
   }
 
+  function handleLoadMore() {
+    loadMoreData(nextPage)
+  }
+
   return (
     <div className="search">
       <InputSearch onChange={debounce(onChange, 300)}/>
       <div className={cn('search__results', { 'search__results--loading': loading }) }>
         {results && (
-          <>
+          <InfiniteScroll
+            pageStart={0}
+            loadMore={() => handleLoadMore()}
+            hasMore={true || false}
+            loader={<div className="loader" key={0}>Loading ...</div>}
+          >
             <ItemList items={results} onItemClick={onItemClick} />
-            <Pagination count={count} />
-          </>
+          </InfiniteScroll>
         )}
 
         {loading && <Spinner />}
@@ -59,12 +69,14 @@ const mapStateToProps = state => ({
   category: selectCategory(state),
   loading: selectSearchLoading(state),
   results: selectSearchResults(state),
-  count: selectCount(state)
+  count: selectCount(state),
+  nextPage: selectSearchNextPage(state)
 })
 
 const actions = {
   selectItem,
-  fetchData
+  fetchData,
+  loadMoreData
 }
 
 export default connect(mapStateToProps, actions)(Search);

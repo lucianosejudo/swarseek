@@ -10,3 +10,7 @@ export const selectSearchResults = createSelector(
     [selectSearchData],
     data => data?.results
 )
+export const selectSearchNextPage = createSelector(
+    [selectSearchData],
+    data => data?.next
+)
