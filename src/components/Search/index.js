@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import cn from 'classnames'
 import InfiniteScroll from 'react-infinite-scroller';
@@ -27,6 +27,7 @@ function Search({
     nextPage,
     loadMoreData
   }) {
+  const [scrollParentRef, setRef] = useState(null)
 
   function onChange(search) {
     fetchData({ category, search })
@@ -45,14 +46,17 @@ function Search({
       <InputSearch onChange={debounce(onChange, 300)}/>
       <div className={cn('search__results', { 'search__results--loading': loading }) }>
         {results && (
+          <div style={{ height:"500px", overflow:"auto" }} ref={(ref) => setRef(ref)}>
           <InfiniteScroll
             pageStart={0}
             loadMore={() => handleLoadMore()}
             hasMore={!!nextPage}
             loader={<div style={{ textAlign: 'center' }}><CircularProgress /></div>}
+            getScrollParent={() => scrollParentRef}
           >
             <ItemList items={results} onItemClick={onItemClick} />
           </InfiniteScroll>
+          </div>
         )}
 
         {loading && <Spinner />}

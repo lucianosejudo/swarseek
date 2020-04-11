@@ -1,6 +1,7 @@
 @import 'assets/styles/_colors';
 
 .welcome {
+  text-align: center;
   &__title {
     font-size: 50px;
   }
@@ -21,7 +22,7 @@
     justify-content: center;
 
     img {
-      height: 20vh;
+      height: 15vh;
     }
   }
 }

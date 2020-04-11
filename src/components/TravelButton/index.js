@@ -10,8 +10,6 @@ const useStyles = makeStyles(theme => ({
     '& > *': {
       margin: theme.spacing(1),
     },
-    position: 'absolute',
-    bottom: '30px'
   },
   text: {
     color: '#fafafa',
@@ -31,7 +29,7 @@ function TravelButton({ active = false, onClick }) {
         endIcon={active ? <FlightLand /> : <FlightTakeoff />}
         onClick={onClick}
       >
-        {active ? 'Go back to Earth' : 'Go to space'}
+        {active ? 'Volver a la Tierra' : 'Viaje al espacio'}
       </Button>
     </div>
   )

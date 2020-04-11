@@ -1,0 +1,13 @@
+@import 'assets/styles/_variables';
+
+.logo {
+  text-align: left;
+
+  @media (max-width: $medium-device) {
+    text-align: center;
+  }
+
+  &__image {
+    height: 6vh;
+  }
+}

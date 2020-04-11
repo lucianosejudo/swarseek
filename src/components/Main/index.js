@@ -17,21 +17,24 @@ function Main({ selectedItem }) {
   function handleSetSpace() {
     toggleSpace(!space)
   }
+
   return (
     <div className="main">
       {space && <Space />}
-      <Grid container spacing={5}>
-        <Grid item sm={12}>
+      <Grid container spacing={5} justify="center">
+        <Grid item sm={12} md={10}>
           <LogoTitle />
         </Grid>
-        <Grid item xs={12} sm={3}>
-          <Menu />
+        <Grid item sm={0} md={2}>
           <TravelButton onClick={handleSetSpace} active={space} />
         </Grid>
-        <Grid item xs={12} sm={3}>
+        <Grid item xs={12} md={3}>
+          <Menu />
+        </Grid>
+        <Grid item xs={12} md={3}>
           <Search />
         </Grid>
-        <Grid item xs={12} sm={6}>
+        <Grid item xs={12} md={6}>
           {selectedItem
           ? <Resume item={selectedItem} /> : <Welcome />
           }
